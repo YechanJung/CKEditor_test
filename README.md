@@ -9,4 +9,4 @@ db저정될때 string으로 저장됨
 
 현 페이지에서는 위에서 입력하면 db저장되고 새로고침하면 바로 밑에 받아지게 설정
 
-Editor.js , PostList.js만 작동중
+Editor.js , PostList.js view.py 참고
