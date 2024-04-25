@@ -8,7 +8,10 @@ function Editor() {
         e.preventDefault();
           const res = await fetch('/api/editor/', {
             method: 'POST',
-            body: JSON.stringify( editorData ),
+            headers: {
+              'Content-Type': 'application/json', // This line is crucial
+            },
+            body: JSON.stringify({ content: editorData }),
         });
         
         const data = await res.text();

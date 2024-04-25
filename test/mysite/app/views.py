@@ -1,15 +1,14 @@
-from rest_framework import viewsets, status, 
-from .models import Post, MyModel
-from .serializers import PostSerializer, MyModelSerializer
+from rest_framework import viewsets, status
+from .models import Post
+from .serializers import PostSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
-
-class PostViewSet(viewsets.ModelViewSet):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
 
 
 @api_view(['POST'])
-class MyModelViewSet(viewsets.ModelViewSet):
-    queryset = MyModel.objects.all()
-    serializer_class = MyModelSerializer
-
+def create_post(request):
+    content = request.data['content']
+    post= Post.objects.create(title="title", content=content)
+    serializer = PostSerializer(post)
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
