@@ -12,3 +12,10 @@ def create_post(request):
     post= Post.objects.create(title="title", content=content)
     serializer = PostSerializer(post)
     return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['GET'])
+def list_post(request):
+    posts = Post.objects.all()
+    serializer = PostSerializer(posts, many=True)
+    return Response(serializer.data)
