@@ -1,5 +1,5 @@
 # CKEditor_test
-git clone  ->  cd test -> npm init -> npm i -> npm start
+git clone  ->  cd test -> npm init -> npm i -> -> npm i --force @ckeditor/ckeditor5-react @ckeditor/ckeditor5-build-classic  -> npm start
 
 cd test -> cd mysite -> python manage.py runserver
 
