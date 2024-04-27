@@ -45,8 +45,8 @@ def createProduct(request):
 
 @api_view(['POST'])
 def createBoard(request):
-    name=request.data['board_name']
-    image=request.FILES['image']
+    name="name"
+    image=request.FILES['file']
     board = Board.objects.create(name=name, image=image)
     serializer = BoardSerializer(board)
     return Response(serializer.data, status=status.HTTP_201_CREATED)

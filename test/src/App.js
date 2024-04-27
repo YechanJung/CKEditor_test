@@ -5,7 +5,7 @@ function App() {
   return (
     <div>
       <Editor />
-      <PostList />
+      {/* <PostList /> */}
     </div>
   )
 }
