@@ -50,3 +50,9 @@ def createBoard(request):
     board = Board.objects.create(name=name, image=image)
     serializer = BoardSerializer(board)
     return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+@api_view(['GET'])
+def listBoard(request):
+    boards = Board.objects.all()
+    serializer = BoardSerializer(boards, many=True)
+    return Response(serializer.data)

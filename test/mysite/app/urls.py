@@ -12,4 +12,6 @@ urlpatterns = [
     path('upload/', uploadImage),
     path('createProduct/', createProduct),
     path('createBoard/', createBoard),
+    path('listBoard/', listBoard),
+    # path('')
 ]
