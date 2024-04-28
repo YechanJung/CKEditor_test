@@ -3,6 +3,8 @@ from .models import *
 from .serializers import *
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from datetime import datetime
+
 
 
 
@@ -55,4 +57,44 @@ def createBoard(request):
 def listBoard(request):
     boards = Board.objects.all()
     serializer = BoardSerializer(boards, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def createBoardd(request):
+    user = User.objects.get(id=1)
+    user_id_id = user.id
+    product_url = "product_url"
+    title = "title"
+    content = "content"
+    image_url = None
+    show = 3
+    like = 3
+    create_at = datetime.now()
+    board = Boardd.objects.create(user_id_id=user_id_id, product_url=product_url, title=title, content=content, image_url=image_url, show=show, like=like, created_at=create_at)
+    serializer = BoarddSerializer(board)
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+@api_view(['POST'])
+def updateBoarddImage(request):
+    board = Boardd.objects.get(id=1)
+    board.image_url = request.FILES['file']
+    board.save()
+    serializer = BoarddSerializer(board)
+    return Response(serializer.data)
+
+@api_view(['PUT'])
+def updateBoardd(request):
+    data = request.data
+    board = Boardd.objects.get(id=1)
+    board.title = "title"
+    board.content = data['content']
+    board.save()
+    serializer = BoarddSerializer(board)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def listBoardd(request):
+    boards = Boardd.objects.all()
+    serializer = BoarddSerializer(boards, many=True)
     return Response(serializer.data)

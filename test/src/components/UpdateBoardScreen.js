@@ -3,7 +3,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 
-function Editor() {
+function UpdateBoardScreen() {
   const [editorData, setEditorData] = useState("");
   const [fileName, setFileName] = useState(null);
   class CustomUploadAdapter {
@@ -20,8 +20,9 @@ function Editor() {
           const data = new FormData();
           data.append("name", file.name);
           data.append("file", file);
+          data.append("pk", 1)
 
-          fetch("/api/createBoard/", {
+          fetch("/api/updateBoarddImage/", {
             method: "POST",
             body: data,
           })
@@ -47,7 +48,11 @@ useEffect(() => {
         const parsedHtml = parser.parseFromString(editorData, "text/html");
         const figures = parsedHtml.querySelectorAll("figure");
         figures.forEach(figure => {
-          figure.className = "/images/"+fileName;
+            const img = figure.querySelector("img");
+            if (img) {
+                img.src = "/images/"+fileName;
+            }
+          figure.src = "/images/"+fileName;
         }
         )
         const serializer = new XMLSerializer();
@@ -60,11 +65,19 @@ useEffect(() => {
       return new CustomUploadAdapter(loader);
     };
   }
-  function handleEditorChange(data) {
-    console.log(data);
-  }
+//   function handleEditorChange(data) {
+//     console.log(data);
+//   }
   function submithandler() {
+    const res = fetch("/api/updateBoardd/", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ content: editorData }),
+    })
     console.log("fetch "  + editorData);
+     
   }
   return (
     <>
@@ -75,7 +88,7 @@ useEffect(() => {
         config={{
           extraPlugins: [uploadPlugin],
         }}
-        onChange={ ( editor ) => {
+        onChange={ ( event, editor ) => {
           const data = editor.getData();
           setEditorData(data);
       } }
@@ -85,4 +98,4 @@ useEffect(() => {
   );
 }
 
-export default Editor;
+export default UpdateBoardScreen;

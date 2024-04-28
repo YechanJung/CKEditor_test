@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
@@ -28,6 +30,18 @@ class Board(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Boardd(models.Model):
+    # 외래키
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    product_url = models.CharField(max_length=200)
+    title = models.CharField(max_length=100)
+    content = models.TextField(blank=True)
+    image_url = models.ImageField()
+    show = models.IntegerField(default=0)
+    like = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
 
 
 # from django.http import JsonResponse

@@ -25,3 +25,8 @@ class BoardSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
     
+
+class BoarddSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Boardd
+        fields = '__all__'
