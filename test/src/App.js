@@ -6,6 +6,7 @@ import CreateBoardButton from './components/CreateBoardButton'
 import UpdateBoardScreen from './components/UpdateBoardScreen';
 import BoardList from './components/BoardList'
 import GetBoardd from './components/GetBoardd';
+import RadioGroupRating from './components/icon';
 function App() {
   return (
     <div>
@@ -20,7 +21,9 @@ function App() {
           <Route path="/" element={<CreateBoardButton />} />
         </Routes>
       </Router> */}
-      <GetBoardd />
+      {/* <GetBoardd /> */}
+      <RadioGroupRating />
+
     </div>
   )
 }
